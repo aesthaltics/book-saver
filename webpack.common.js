@@ -17,7 +17,7 @@ module.exports = {
 	entry: {
 		popup: path.resolve("src/popup/popup.tsx"),
 		background: path.resolve("src/background/background.ts"),
-		"content-script": path.resolve("src/content-script/content-script.ts"),
+		"content-script": path.resolve("src/content-script/index.tsx"),
 	},
 	module: {
 		rules: [
@@ -61,7 +61,7 @@ module.exports = {
 		splitChunks: {
 			chunks(chunk) {
 				// exclude `my-excluded-chunk`
-				return chunk.name !== "my-excluded-chunk";
+				return chunk.name !== "content-script";
 			},
 		},
 	},

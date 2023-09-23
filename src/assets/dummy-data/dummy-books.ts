@@ -1,4 +1,4 @@
-const testData = [
+const dummyBooks = [
   {
     title: "Building a Second Brain",
     authors: ["Tiago Forte"],
@@ -503,4 +503,4 @@ const testData = [
   },
 ];
 
-export default testData
+export default dummyBooks

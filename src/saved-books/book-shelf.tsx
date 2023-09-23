@@ -17,7 +17,7 @@ const BookShelf = () => {
 					
 				</div>
 			</div>
-			<div className="relative m-10 flex flex-wrap justify-start justify-items-center gap-4 outline-dotted outline-purple-500">
+			<div className="relative m-10 flex flex-wrap justify-start justify-items-center gap-4">
 					{books &&
 						books.map((book) => (
 							<div
@@ -68,7 +68,7 @@ const BookCard = forwardRef<HTMLDivElement, CardProps>(
 
 			>
 				<div
-					className={`dark flex flex-col items-center justify-between rounded-lg bg-primary p-0 opacity-100 outline-dashed outline-teal-300 hover:absolute hover:z-50 hover:min-h-max hover:opacity-100`}
+					className={`dark flex flex-col items-center justify-between rounded-lg bg-primary p-0 opacity-100 hover:absolute hover:z-50 hover:min-h-max hover:opacity-100`}
 					
 					style={{
 						width: `${cardHeight * imgHeight * ratio}px`,

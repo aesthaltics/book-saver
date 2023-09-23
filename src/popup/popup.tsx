@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import emptyCover from "../assets/img/empty-cover.svg"
-import "../styles/tailwind.css";
+import emptyCover from "@/assets/img/empty-cover.svg"
+import "@/styles/tailwind.css";
 type Props = {};
 const Popup = (props: Props) => {
 	return (

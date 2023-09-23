@@ -28,7 +28,12 @@ module.exports = {
 			},
 			{
 				test: /\.css$/i,
+				exclude: /injectedTailwind\.css$/,
 				use: ["style-loader", "css-loader", "postcss-loader"],
+			},
+			{
+				test: /injectedTailwind\.css$/,
+				use: ["postcss-loader"],
 			},
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/i,

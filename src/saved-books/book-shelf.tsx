@@ -1,51 +1,42 @@
-import React, {useState, useRef, forwardRef} from 'react'
-import dummyBooks from '@/assets/dummy-data/dummy-books';
-import dummySearchLinks from '@/assets/dummy-data/dummy-search-links';
-import "@/styles/tailwind.css"
-
-
+import React, { useState, useRef, forwardRef } from "react";
+import dummyBooks from "@/assets/dummy-data/dummy-books";
+import dummySearchLinks from "@/assets/dummy-data/dummy-search-links";
+import "@/styles/tailwind.css";
 
 const BookShelf = () => {
-	const books = dummyBooks
-	const [cardHeight, setCardHeight] = React.useState<number>(400);
-
+	const books = dummyBooks;
+	const [cardHeight, setCardHeight] = React.useState<number>(250);
 
 	return (
 		<div className="relative h-screen w-screen overflow-y-scroll bg-muted">
 			<div className="flex">
-				<div className="mx-auto mt-4 flex w-1/2 items-center space-x-3">
-					
-				</div>
+				<div className="mx-auto mt-4 flex w-1/2 items-center space-x-3"></div>
 			</div>
 			<div className="relative m-10 flex flex-wrap justify-start justify-items-center gap-4">
-					{books &&
-						books.map((book) => (
-							<div
-								key={`${book.id}`}
-							>
-								<BookCard
-									cardHeight={cardHeight}
-									book={book}
-									key={book.id}
-									handleDelete={() => {return}}
-								/>
-							</div>
-						))}
-
-					
-						
-				
+				{books &&
+					books.map((book) => (
+						<div key={`${book.id}`}>
+							<BookCard
+								cardHeight={cardHeight}
+								book={book}
+								key={book.id}
+								handleDelete={() => {
+									return;
+								}}
+							/>
+						</div>
+					))}
 			</div>
 		</div>
 	);
 };
 
-export default BookShelf
+export default BookShelf;
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 	book: Book;
 	cardHeight: number;
-	handleDelete: () => void
+	handleDelete: () => void;
 }
 
 const BookCard = forwardRef<HTMLDivElement, CardProps>(
@@ -56,7 +47,6 @@ const BookCard = forwardRef<HTMLDivElement, CardProps>(
 			setRatio(ratio);
 		};
 
-
 		const imgHeight = 2 / 3;
 		return (
 			<div
@@ -65,18 +55,19 @@ const BookCard = forwardRef<HTMLDivElement, CardProps>(
 					width: `${cardHeight * imgHeight * ratio}px`,
 				}}
 				className="z-0"
-
 			>
 				<div
-					className={`dark flex flex-col items-center justify-between rounded-lg bg-primary p-0 opacity-100 hover:absolute hover:z-50 hover:min-h-max hover:opacity-100`}
-					
+					className={`flex flex-col items-center justify-between rounded-lg bg-primary p-0 opacity-100 hover:absolute hover:z-50 hover:min-h-max hover:opacity-100 bg-gray-100 hover:scale-125 duration-100`}
 					style={{
 						width: `${cardHeight * imgHeight * ratio}px`,
 						zIndex: isHovered ? 10 : 0,
 						minHeight: `${cardHeight}px`,
 						height: isHovered ? "auto" : `${cardHeight}px`,
 					}}
-					
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => {
+						setIsHovered(false);
+					}}
 				>
 					<DeleteButton
 						isActive={isHovered}
@@ -97,11 +88,8 @@ const BookCard = forwardRef<HTMLDivElement, CardProps>(
 						isActive={isHovered}
 					/>
 
-					<div className="w-full px-5">
-						
-					</div>
+					<div className="w-full px-5"></div>
 					<SearchLinks title={book.title} />
-
 				</div>
 			</div>
 		);
@@ -121,9 +109,7 @@ export const DeleteButton = ({
 				isActive ? "flex" : "hidden"
 			} absolute items-center justify-center self-end`}
 			onClick={handleDelete}
-		>
-			
-		</button>
+		></button>
 	);
 };
 
@@ -181,37 +167,39 @@ export const CardInfo = ({
 };
 
 type SearchLinksProps = {
-  title: string;
+	title: string;
 };
 
 function SearchLinks({ title }: SearchLinksProps) {
-  let searchURLs = dummySearchLinks
-  if (!searchURLs || searchURLs?.length === 0) {
-    return;
-  }
-  return (
-    <div className="mb-2 flex justify-around w-full flex-none">
-      {searchURLs.map((link) => {
-        if (!link.isActive) {
-          return;
-        }
-        return (
-          <button
-            className="h-6 w-6 rounded-full border-gray-400 p-0"
-           
-            onClick={() => {
-              window.open(link.url + title.replace(" ", "+"), "_blank");
-            }}
-            key={link.id}
-          >
-            <img
-              src={link.icon}
-              alt={link.name}
-              className="m-0 w-6 rounded-full p-0"
-            />
-          </button>
-        );
-      })}
-    </div>
-  );
+	let searchURLs = dummySearchLinks;
+	if (!searchURLs || searchURLs?.length === 0) {
+		return;
+	}
+	return (
+		<div className="mb-2 flex justify-around w-full flex-none">
+			{searchURLs.map((link) => {
+				if (!link.isActive) {
+					return;
+				}
+				return (
+					<button
+						className="h-6 w-6 rounded-full border-gray-400 p-0"
+						onClick={() => {
+							window.open(
+								link.url + title.replace(" ", "+"),
+								"_blank"
+							);
+						}}
+						key={link.id}
+					>
+						<img
+							src={link.icon}
+							alt={link.name}
+							className="m-0 w-6 rounded-full p-0"
+						/>
+					</button>
+				);
+			})}
+		</div>
+	);
 }

@@ -14,7 +14,6 @@ const getHtmlPlugins = (chunks) => {
 };
 
 module.exports = {
-	mode: "development",
 	entry: {
 		popup: path.resolve("src/popup/popup.tsx"),
 		background: path.resolve("src/background/background.ts"),
@@ -58,7 +57,6 @@ module.exports = {
 		}),
 		...getHtmlPlugins(["popup"]),
 	],
-	devtool: "cheap-module-source-map",
 	optimization: {
 		splitChunks: {
 			chunks(chunk) {

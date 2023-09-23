@@ -153,13 +153,13 @@ export const CardInfo = ({
 	return (
 		<div className={`mt-2 flex w-full flex-col px-2 text-left`}>
 			<h1
-				className={`text-lg ${
-					isActive ? "" : "truncate"
-				} text-ellipsis font-bold tracking-tight`}
+				className={`text-md overflow-auto  ${
+					isActive ? "break-words" : "truncate"
+				} font-bold tracking-tight`}
 			>
 				{title}
 			</h1>
-			<h2 className={`text-md ${isActive ? "" : "truncate"}`}>
+			<h2 className={`text-md ${isActive ? "break-words" : "truncate"}`}>
 				{authors?.length > 0 ? authors[0] : "Unknown"}
 			</h2>
 		</div>

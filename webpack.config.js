@@ -2,6 +2,17 @@ const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
+const getHtmlPlugins = (chunks) => {
+	return chunks.map(
+		(chunk) =>
+			new HtmlWebpackPlugin({
+				title: "test",
+				filename: `${chunk}.html`,
+				chunks: [chunk],
+			})
+	);
+};
+
 module.exports = {
 	mode: "development",
 	entry: {
@@ -18,6 +29,13 @@ module.exports = {
 				test: /\.css$/i,
 				use: ["style-loader", "css-loader", "postcss-loader"],
 			},
+			{
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				type: "asset/resource",
+				generator: {
+					filename: "[name][ext]",
+				},
+			},
 		],
 	},
 	resolve: {
@@ -29,15 +47,19 @@ module.exports = {
 	plugins: [
 		new CopyPlugin({
 			patterns: [
-				{ from: path.resolve("src", "assets", "manifest.json") },
+				{ from: path.resolve("src", "static") },
 				// { from: "other", to: "public" },
 			],
 		}),
-		new HtmlWebpackPlugin({
-			title: "test",
-			filename: "popup.html",
-			chunks: ["popup"],
-		}),
+		...getHtmlPlugins(["popup"]),
 	],
 	devtool: "cheap-module-source-map",
+	optimization: {
+		splitChunks: {
+			chunks(chunk) {
+				// exclude `my-excluded-chunk`
+				return chunk.name !== "my-excluded-chunk";
+			},
+		},
+	},
 };

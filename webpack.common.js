@@ -15,9 +15,10 @@ const getHtmlPlugins = (chunks) => {
 
 module.exports = {
 	entry: {
-		popup: path.resolve("src/popup/popup.tsx"),
+		popup: path.resolve("src/popup/index.tsx"),
 		background: path.resolve("src/background/background.ts"),
 		"content-script": path.resolve("src/content-script/index.tsx"),
+		"saved-books": path.resolve("src/saved-books/index.tsx"),
 	},
 	module: {
 		rules: [
@@ -33,7 +34,7 @@ module.exports = {
 			},
 			{
 				test: /injectedTailwind\.css$/,
-				use: ["postcss-loader"],
+				use: ["css-loader", "postcss-loader"],
 			},
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -60,7 +61,7 @@ module.exports = {
 				// { from: "other", to: "public" },
 			],
 		}),
-		...getHtmlPlugins(["popup"]),
+		...getHtmlPlugins(["popup", "saved-books"]),
 	],
 	optimization: {
 		splitChunks: {

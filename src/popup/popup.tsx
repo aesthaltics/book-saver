@@ -1,19 +1,21 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import emptyCover from "@/assets/img/empty-cover.svg"
 import "@/styles/tailwind.css";
+
 type Props = {};
 const Popup = (props: Props) => {
 	return (
-		<div className="h-64 w-64 bg-red-500">
-			Popup
-			<img src={emptyCover} alt="image of empyty cover" />
+		<div className={"h-auto w-auto min-w-max bg-gray-600 p-5"}>
+			<div className="flex flex-col justify-center gap-4 text-center">
+				<button
+					className="bg-blue-500 font-bold text-white hover:bg-blue-700"
+					onClick={() => {
+						window.open("saved-books.html", "_blank");
+					}}
+				>
+					Saved Books
+				</button>
+			</div>
 		</div>
 	);
 };
 export default Popup;
-
-const container = document.createElement("div");
-document.body.appendChild(container);
-const root = createRoot(container);
-root.render(<Popup />);

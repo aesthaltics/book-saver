@@ -5,7 +5,6 @@
 	"author": "aesthaltics@pm.me",
 	"description": "A chrome extension that saves books",
 	"permissions": ["contextMenus", "storage", "activeTab", "scripting"],
-	"host_permissions": ["https://*/*", "http://*/*"],
 	"action": {
 		"default_popup": "popup.html"
 	},
@@ -16,6 +15,12 @@
 		{
 			"matches": ["http://*/*", "https://*/*", "<all_urls>"],
 			"js": ["content-script.js"]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": ["empty-cover.svg"],
+			"matches": ["<all_urls>"]
 		}
 	]
 }

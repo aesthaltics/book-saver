@@ -17,6 +17,8 @@ module.exports = {
 	mode: "development",
 	entry: {
 		popup: path.resolve("src/popup/popup.tsx"),
+		background: path.resolve("src/background/background.ts"),
+		"content-script": path.resolve("src/content-script/content-script.ts"),
 	},
 	module: {
 		rules: [

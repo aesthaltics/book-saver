@@ -11,5 +11,11 @@
 	},
 	"background": {
 		"service_worker": "background.js"
-	}
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*", "<all_urls>"],
+			"js": ["content-script.js"]
+		}
+	]
 }

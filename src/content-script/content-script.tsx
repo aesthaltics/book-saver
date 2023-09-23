@@ -1,13 +1,15 @@
 import React from "react";
 import styles from "@/styles/injectedTailwind.css";
 
-type Props = {};
-const ContentScript = (props: Props) => {
+type Props = {
+	del: () => void;
+};
+const ContentScript = ({del}: Props) => {
 	// console.log(styles.toString())
 	return (
-		<div>
+		<div onClick={del}>
 			<style type="text/css">{styles.toString()}</style>
-			<div className="isolate absolute z-[999] flex h-screen w-screen items-center justify-center bg-gray-300 bg-opacity-30 inset-0">
+			<div className="isolate fixed z-[999] flex h-screen w-screen items-center justify-center bg-gray-300 bg-opacity-30 inset-0">
 				ContentScript
 			</div>
 		</div>

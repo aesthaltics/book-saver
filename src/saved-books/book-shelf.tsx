@@ -1,10 +1,11 @@
 import React, { useState, useRef, forwardRef } from "react";
-import dummyBooks from "@/assets/dummy-data/dummy-books";
+
 import dummySearchLinks from "@/assets/dummy-data/dummy-search-links";
 import "@/styles/tailwind.css";
+import useBooks from "@/scripts/hooks/useBooks";
 
 const BookShelf = () => {
-	const books = dummyBooks;
+	const books = useBooks()
 	const [cardHeight, setCardHeight] = React.useState<number>(250);
 
 	return (

@@ -2,8 +2,6 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import ContentScript from './content-script'
 
-import dummyBooks from '@/assets/dummy-data/dummy-books'
-
 const init = (books: Book[]) => {
 	const appContainer = document.createElement("div");
 	const shadow = appContainer.attachShadow({ mode: "open" });
@@ -20,8 +18,6 @@ const init = (books: Book[]) => {
 	document.body.appendChild(appContainer);
 	const root = createRoot(shadow);
 
-	console.log(appContainer);
-
 	root.render(
 		<ContentScript
 			books={books}
@@ -33,4 +29,11 @@ const init = (books: Book[]) => {
 		/>
 	);
 };
-init(dummyBooks)
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+	if (request.message === "createBookList") {
+		console.log(request.books);
+		init(request.books);
+	}
+});
+
+console.log("content script running")

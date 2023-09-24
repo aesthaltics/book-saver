@@ -1,7 +1,11 @@
+import { searchForBooks } from "@/scripts/handleBooks";
+
 chrome.runtime.onInstalled.addListener(function () {
+
+
 	chrome.contextMenus.create({
-		id: "searchForBook",
-		title: "Search for book",
+		id: "searchForBook2",
+		title: "Search for book 2",
 		contexts: ["link"],
 	});
 });
@@ -17,7 +21,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 		return;
 	}
 
+	const books = await searchForBooks(info.linkUrl)
+
 	chrome.tabs.sendMessage(tab.id, {
-		message: "hello",
+		books: books,
+		message: "createBookList",
 	});
 });
+
+console.log("running");

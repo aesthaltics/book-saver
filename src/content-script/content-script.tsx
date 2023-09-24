@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "@/styles/injectedTailwind.css";
 
+
 type Props = {
 	del: () => void;
 	books: Book[];
 };
 const ContentScript = ({ del, books }: Props) => {
-	// console.log(styles.toString())
 	return (
 		<div onClick={del}>
 			<style type="text/css">{styles.toString()}</style>

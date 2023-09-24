@@ -1,13 +1,15 @@
 import { searchForBooks } from "@/scripts/handleBooks";
+import dummyLinks from "@/assets/dummy-data/dummy-search-links"
+import { saveSearchLink } from "@/scripts/handleStorage";
 
-chrome.runtime.onInstalled.addListener(function () {
-
-
+chrome.runtime.onInstalled.addListener(async function () {
 	chrome.contextMenus.create({
 		id: "searchForBook2",
 		title: "Search for book 2",
 		contexts: ["link"],
 	});
+	dummyLinks.forEach(async dummyLink => await saveSearchLink(dummyLink))
+
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {

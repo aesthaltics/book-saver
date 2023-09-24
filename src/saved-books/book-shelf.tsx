@@ -1,8 +1,9 @@
 import React, { useState, useRef, forwardRef } from "react";
 
-import dummySearchLinks from "@/assets/dummy-data/dummy-search-links";
+
 import "@/styles/tailwind.css";
 import useBooks from "@/scripts/hooks/useBooks";
+import useSearchURLs from "@/scripts/hooks/useSearchURLs";
 
 const BookShelf = () => {
 	const books = useBooks()
@@ -172,7 +173,7 @@ type SearchLinksProps = {
 };
 
 function SearchLinks({ title }: SearchLinksProps) {
-	let searchURLs = dummySearchLinks;
+	let searchURLs = useSearchURLs()
 	if (!searchURLs || searchURLs?.length === 0) {
 		return;
 	}

@@ -23,9 +23,9 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.tsx?$/,
 				use: "ts-loader",
-				test: /\.tsx$/,
-				exclude: /node_modules/,
+				exclude: "/node_modules/",
 			},
 			{
 				test: /\.css$/i,
@@ -67,7 +67,9 @@ module.exports = {
 		splitChunks: {
 			chunks(chunk) {
 				// exclude `my-excluded-chunk`
-				return chunk.name !== "content-script";
+				return (
+					chunk.name !== "content-script"
+				);
 			},
 		},
 	},

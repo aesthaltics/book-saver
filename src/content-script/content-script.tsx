@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/styles/injectedTailwind.css";
+import { saveBook } from "@/scripts/handleStorage";
 
 
 type Props = {
@@ -15,7 +16,7 @@ const ContentScript = ({ del, books }: Props) => {
 					className="h-4/5 w-96 overflow-y-scroll rounded-xl bg-gray-400"
 					onClick={(e) => e.stopPropagation()}
 				>
-					<FoundBookList books={books} handleSave={(book) => {return}}/>
+					<FoundBookList books={books} handleSave={saveBook}/>
 				</div>
 			</div>
 		</div>
